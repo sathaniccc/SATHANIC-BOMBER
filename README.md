@@ -6,7 +6,7 @@
 
 ```bash
 pkg update && pkg install python git -y
-git clone https://github.com/yourusername/SATHANIC-BOMBER.git
+git clone (https://github.com/sathaniccc/SATHANIC-BOMBER)
 cd SATHANIC-BOMBER
 python bomber.py
 ```
