@@ -1,25 +1,22 @@
-import time
+import os
 import random
+from twilio.rest import Client
+from dotenv import load_dotenv
 
-def send_fake_otp(number):
-    otp = random.randint(100000, 999999)
-    print(f"[+] Sending OTP to {number} -> {otp}")
-    time.sleep(1)
+load_dotenv()
 
-def main():
-    print("""
-===============================
-      SATHANIC BOMBER v1.0
-         FOR FUN ONLY
-===============================
-    """)
-    number = input("Enter target number (e.g. +91xxxxxxxxxx): ")
-    count = int(input("Enter how many OTPs to send (fake): "))
+account_sid = os.getenv('AC9df72adf5c5f8dcfc7c0fe28eb885dea')
+auth_token = os.getenv('85d31daf30769cd327e170c6d32f8ef8')
+twilio_number = os.getenv('918921016567')
+target_number = os.getenv('918921016567')
 
-    for i in range(count):
-        send_fake_otp(number)
+client = Client(account_sid, auth_token)
 
-    print("\n[✔] Finished sending fake OTPs.")
+otp = str(random.randint(100000, 999999))
+message = client.messages.create(
+    body=f'Your OTP is {otp}',
+    from_=twilio_number,
+    to=target_number
+)
 
-if __name__ == "__main__":
-    main()
+print(f"[✔] OTP sent to {target_number} → SID: {message.sid}")
